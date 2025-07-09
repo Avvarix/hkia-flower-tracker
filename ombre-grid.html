@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
   <script>
-    const WEBAPP_URL = 'YOUR_WEBAPP_URL'; // Replace with your deployed Apps Script Web App URL
+    const WEBAPP_URL = 'YOUR_WEBAPP_URL';
 
     async function submitFlower(data) {
       const resp = await fetch(WEBAPP_URL, {
@@ -38,14 +38,160 @@
           else alert('Oops, something went wrong.');
         });
     }
+
+    const colors = [
+      'White', 'Red', 'Warm Pink', 'Coral', 'Blush', 'Orange', 'Peach', 'Yellow', 'Cream',
+      'Lime', 'Pistachio', 'Green', 'Mint', 'Teal', 'Seafoam', 'Sky', 'Cloud', 'Blue', 'Ice',
+      'Indigo', 'Periwinkle', 'Violet', 'Lilac', 'Magenta', 'Cool Pink', 'Hot Pink', 'Pink'
+    ];
+
+    function getColorHex(name) {
+      const map = {
+        'White': '#FFFFFF', 'Red': '#DC143C', 'Warm Pink': '#FF69B4', 'Coral': '#FF7F50',
+        'Blush': '#DE5D83', 'Orange': '#FF8C00', 'Peach': '#FFCBA4', 'Yellow': '#FFD700',
+        'Cream': '#F5F5DC', 'Lime': '#32CD32', 'Pistachio': '#93C572', 'Green': '#228B22',
+        'Mint': '#98FB98', 'Teal': '#008B8B', 'Seafoam': '#20B2AA', 'Sky': '#87CEEB',
+        'Cloud': '#B0C4DE', 'Blue': '#4169E1', 'Ice': '#B0E0E6', 'Indigo': '#4B0082',
+        'Periwinkle': '#C5C5FF', 'Violet': '#8A2BE2', 'Lilac': '#DDA0DD', 'Magenta': '#FF00FF',
+        'Cool Pink': '#FF1493', 'Hot Pink': '#FF69B4', 'Pink': '#FFC0CB'
+      };
+      return map[name] || '#eee';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const thead = document.querySelector('.collection-grid thead tr');
+      const tbody = document.querySelector('.collection-grid tbody');
+
+      colors.forEach(color => {
+        const th = document.createElement('th');
+        th.className = 'col-header';
+        th.textContent = color;
+        thead.appendChild(th);
+      });
+
+      colors.forEach((primary, rowIndex) => {
+        const row = document.createElement('tr');
+        const rowHeader = document.createElement('td');
+        rowHeader.className = 'row-header';
+        rowHeader.textContent = primary;
+        row.appendChild(rowHeader);
+
+        colors.forEach((pattern, colIndex) => {
+          const cell = document.createElement('td');
+          cell.className = 'data-cell';
+
+          if (primary === pattern) {
+            cell.style.backgroundColor = '#f5f5f5';
+          } else {
+            const flowerId = `OMBRE_${primary.replace(/\s/g, '')}_${pattern.replace(/\s/g, '')}`;
+            const button = document.createElement('div');
+            button.className = 'checkmark-button';
+            button.textContent = '✔';
+            button.onclick = () => onClickFlower(primary, pattern, flowerId);
+            cell.appendChild(button);
+
+            cell.addEventListener('mouseenter', () => {
+              highlightGrid(rowIndex, colIndex, primary, pattern);
+            });
+
+            cell.addEventListener('mouseleave', () => {
+              clearHighlightGrid();
+            });
+          }
+
+          row.appendChild(cell);
+        });
+
+        tbody.appendChild(row);
+      });
+    });
+
+    function highlightGrid(rowIndex, colIndex, rowColorName, colColorName) {
+      const rows = document.querySelectorAll('.collection-grid tbody tr');
+      const headerRow = document.querySelectorAll('.collection-grid thead tr th');
+      const colHex = getColorHex(colColorName);
+      const rowHex = getColorHex(rowColorName);
+
+      rows.forEach((row, rIdx) => {
+        const cells = row.querySelectorAll('td');
+        if (rIdx === rowIndex) {
+          row.style.backgroundColor = colHex;
+        }
+        cells.forEach((cell, cIdx) => {
+          if (cIdx === colIndex + 1) {
+            cell.style.backgroundColor = rowHex;
+          }
+        });
+      });
+
+      if (headerRow[colIndex + 1]) {
+        headerRow[colIndex + 1].style.backgroundColor = rowHex;
+      }
+    }
+
+    function clearHighlightGrid() {
+      document.querySelectorAll('.collection-grid tr').forEach(row => {
+        row.style.backgroundColor = '';
+        row.querySelectorAll('td, th').forEach(cell => {
+          cell.style.backgroundColor = '';
+        });
+      });
+    }
   </script>
+  <style>
+    .grid-container {
+      overflow-x: auto;
+      padding: 40px 20px;
+    }
+    .collection-grid {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.75em;
+    }
+    .collection-grid th,
+    .collection-grid td {
+      border: 1px solid #dee2e6;
+      padding: 4px;
+      text-align: center;
+    }
+    .corner-cell {
+      background: #eee;
+      font-weight: bold;
+    }
+    .col-header {
+      writing-mode: vertical-lr;
+      text-orientation: mixed;
+      min-height: 120px;
+    }
+    .row-header {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .data-cell {
+      width: 32px;
+      height: 32px;
+      position: relative;
+    }
+    .checkmark-button {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      background: #ff6b9d;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="container">
       <h1>🌸 HKIA Ombre Flower Tracker 🌸</h1>
-      <p>Click a checkmark to log your ombre flower discovery!</p>
+      <p>Click a cell to log an ombre flower combination</p>
     </div>
   </header>
 
@@ -63,35 +209,17 @@
     </div>
   </nav>
 
-  <!-- Grid Content -->
-  <main class="section">
-    <div class="container">
-      <h2>🌿 Ombre Pattern Color Combinations</h2>
-      <div class="personal-stats">
-        <!-- Example Entries -->
-        <div class="stat-card" onclick="onClickFlower('Red','Pink','REDPINK01')">
-          <div class="stat-number">✔️</div>
-          <div class="stat-label">Red to Pink</div>
-        </div>
-        <div class="stat-card" onclick="onClickFlower('Blue','Purple','BLUEPURP01')">
-          <div class="stat-number">✔️</div>
-          <div class="stat-label">Blue to Purple</div>
-        </div>
-        <div class="stat-card" onclick="onClickFlower('Yellow','Orange','YELLORANGE01')">
-          <div class="stat-number">✔️</div>
-          <div class="stat-label">Yellow to Orange</div>
-        </div>
-        <div class="stat-card" onclick="onClickFlower('Pink','White','PINKWHITE01')">
-          <div class="stat-number">✔️</div>
-          <div class="stat-label">Pink to White</div>
-        </div>
-        <div class="stat-card" onclick="onClickFlower('Green','Teal','GREENTEAL01')">
-          <div class="stat-number">✔️</div>
-          <div class="stat-label">Green to Teal</div>
-        </div>
-        <!-- Add more color pairs as needed -->
-      </div>
-    </div>
+  <!-- Main Grid -->
+  <main class="grid-container">
+    <table class="collection-grid">
+      <thead>
+        <tr>
+          <th class="corner-cell">Primary Color<br>↓ Pattern Color →</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </main>
 
   <!-- Footer -->
