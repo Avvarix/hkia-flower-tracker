@@ -1,0 +1,57 @@
+.header p {
+    font-size: 1em;
+}
+
+.nav-links {
+    display: none;
+}
+
+.mobile-menu-btn {
+    display: block;
+}
+
+.hero-content h2 {
+    font-size: 1.6em;
+}
+
+.community-stats {
+    gap: 20px;
+}
+
+.stat {
+    min-width: 120px;
+}
+
+.stat-number {
+    font-size: 2em;
+}
+
+.actions-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.action-card {
+    padding: 30px 20px;
+}
+
+.personal-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.community-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.steps-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+}
