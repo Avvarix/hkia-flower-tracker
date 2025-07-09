@@ -1,0 +1,214 @@
+<!-- Navigation -->
+<nav class="nav">
+    <div class="container">
+        <div class="nav-brand">🌺 FlowerTracker</div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#collection" class="nav-link">My Collection</a>
+            <a href="#community" class="nav-link">Community</a>
+            <a href="#leaderboards" class="nav-link">Leaderboards</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Welcome to the Community, Flower Collector! 🌺</h2>
+                <div class="community-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="activeCollectors">Loading...</span>
+                        <span class="stat-label">Active Collectors</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="totalDiscoveries">Loading...</span>
+                        <span class="stat-label">Total Discoveries</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="totalFlowers">77,856</span>
+                        <span class="stat-label">Possible Flowers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <div class="container">
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="action-icon">📝</div>
+                    <h3>Log New Discovery</h3>
+                    <p>Quick 30-second form to log your latest flower finds while gaming!</p>
+                    <button class="btn btn-primary" onclick="openCollectionForm()">
+                        🌱 Start Logging
+                    </button>
+                </div>
+                
+                <div class="action-card">
+                    <div class="action-icon">📊</div>
+                    <h3>Personal Dashboard</h3>
+                    <p>Track your progress, achievements, and see which flowers you still need.</p>
+                    <button class="btn btn-secondary" onclick="openPersonalDashboard()">
+                        📈 View Progress
+                    </button>
+                </div>
+                
+                <div class="action-card">
+                    <div class="action-icon">🌍</div>
+                    <h3>Community Insights</h3>
+                    <p>Explore rarity data, discovery trends, and community leaderboards.</p>
+                    <button class="btn btn-accent" onclick="openCommunityDashboard()">
+                        🔍 Explore Community
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Collection Section -->
+    <section id="collection" class="section">
+        <div class="container">
+            <h2>📊 Your Personal Collection</h2>
+            <div class="personal-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="personalFlowers">0</div>
+                    <div class="stat-label">Flowers Owned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="personalCompletion">0%</div>
+                    <div class="stat-label">Collection Complete</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="weeklyProgress">0</div>
+                    <div class="stat-label">Added This Week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="playerRank">#-</div>
+                    <div class="stat-label">Community Rank</div>
+                </div>
+            </div>
+            
+            <div class="dashboard-embed">
+                <div class="embed-placeholder">
+                    <h3>📈 Your Detailed Analytics</h3>
+                    <p>Click below to open your full PowerBI dashboard with detailed progress tracking, breed breakdowns, and achievement status.</p>
+                    <button class="btn btn-primary" onclick="openPersonalDashboard()">
+                        Open Full Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section">
+        <div class="container">
+            <h2>🌍 Community Insights</h2>
+            <div class="community-grid">
+                <div class="insight-card">
+                    <h3>🔥 Trending Discoveries</h3>
+                    <div class="trending-list" id="trendingFlowers">
+                        <div class="trending-item">Loading trending data...</div>
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <h3>💎 Rarest Finds</h3>
+                    <div class="rare-list" id="rareFlowers">
+                        <div class="rare-item">Loading rarity data...</div>
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <h3>🏆 Top Collectors</h3>
+                    <div class="leaderboard-preview" id="topCollectors">
+                        <div class="leader-item">Loading leaderboard...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-embed">
+                <div class="embed-placeholder">
+                    <h3>📊 Full Community Analytics</h3>
+                    <p>Explore comprehensive community data including discovery timelines, rarity analysis, and detailed statistics.</p>
+                    <button class="btn btn-accent" onclick="openCommunityDashboard()">
+                        Open Community Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>🎮 How It Works</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🌱</div>
+                    <h3>Grow Flowers in HKIA</h3>
+                    <p>Discover new flower combinations while playing Hello Kitty Island Adventure</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">📱</div>
+                    <h3>Quick Log</h3>
+                    <p>Bookmark our form and log discoveries in just 30 seconds</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">📊</div>
+                    <h3>Track Progress</h3>
+                    <p>Watch your collection grow and see how you compare to the community</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">🏆</div>
+                    <h3>Earn Achievements</h3>
+                    <p>Unlock milestones and become a master flower collector</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>🌸 HKIA Flower Tracker</h4>
+                <p>Built by the community, for the community. Track your Hello Kitty Island Adventure flower collection with friends!</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#" onclick="openCollectionForm()">Log Flowers</a></li>
+                    <li><a href="#" onclick="openPersonalDashboard()">My Dashboard</a></li>
+                    <li><a href="#" onclick="openCommunityDashboard()">Community Data</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="#" onclick="showAbout()">About This Project</a></li>
+                    <li><a href="#" onclick="showHelp()">How to Use</a></li>
+                    <li><a href="#" onclick="showContact()">Contact & Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 HKIA Flower Tracker Community Project | Made with 💖 for Hello Kitty Island Adventure players</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="app.js"></script>
