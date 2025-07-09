@@ -55,3 +55,23 @@
     gap: 30px;
     text-align: center;
 }
+
+.header {
+    padding: 20px 0;
+}
+
+.header h1 {
+    font-size: 1.5em;
+}
+
+.quick-actions, .section {
+    padding: 40px 0;
+}
+
+.action-card, .stat-card, .insight-card, .dashboard-embed {
+    padding: 20px;
+}
+
+.personal-stats {
+    grid-template-columns: 1fr;
+}
