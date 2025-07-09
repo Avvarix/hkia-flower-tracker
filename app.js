@@ -285,5 +285,102 @@ GitHub Pages for fast, free hosting
 Made with 💖 by the HKIA community!`);
 }
 function showHelp() {
-alert(`❓ How to Use HKIA Flower Tracker)
+alert(`❓ How to Use HKIA Flower Tracker
+This community project helps Hello Kitty Island Adventure players track their flower collections and discover rare combinations.
+Built with:
+
+Google Forms for easy data collection
+Google Sheets for reliable storage
+PowerBI for beautiful analytics
+GitHub Pages for fast, free hosting
+
+Made with 💖 by the HKIA community!`);
 }
+function showHelp() {
+alert(`❓ How to Use HKIA Flower Tracker
+
+🌱 Log Discoveries: Click "Start Logging" to record new flowers you've grown in HKIA
+📊 Track Progress: View your personal dashboard to see your collection stats and achievements
+🌍 Explore Community: Check out community insights to discover rare flowers and trends
+📱 Mobile Friendly: Bookmark this site on your phone for quick access while gaming!
+
+Tips:
+
+Log flowers as soon as you grow them
+Check rarity data to find valuable discoveries
+Join the leaderboards by growing diverse flowers`);
+}
+
+function showContact() {
+alert(`📞 Contact & Feedback
+Have suggestions or found a bug? We'd love to hear from you!
+Ways to reach us:
+
+Report issues on our GitHub repository
+Share feedback in the HKIA community forums
+Suggest new features via the feedback form
+
+This is a community project - your input helps make it better for everyone! 🌸`);
+}
+// Periodic updates
+function startPeriodicUpdates() {
+// Update community stats every 5 minutes
+setInterval(loadCommunityStats, CONFIG.STATS_UPDATE_INTERVAL);
+
+// Update personal stats every 3 minutes (if logged in)
+setInterval(() => {
+    if (userData.isLoggedIn) {
+        loadPersonalStats();
+    }
+}, CONFIG.PERSONAL_UPDATE_INTERVAL);
+
+console.log('⏰ Periodic updates started');
+
+}
+// Utility functions for animations and UX
+function addLoadingAnimation(elementId) {
+const element = document.getElementById(elementId);
+if (element) {
+element.innerHTML = '<span class="loading"></span>';
+}
+}
+function removeLoadingAnimation(elementId, finalValue) {
+updateElementText(elementId, finalValue);
+}
+// Handle online/offline status
+window.addEventListener('online', function() {
+console.log('🌐 Back online - refreshing data...');
+loadCommunityStats();
+if (userData.isLoggedIn) {
+loadPersonalStats();
+}
+});
+window.addEventListener('offline', function() {
+console.log('📵 Offline - using cached data');
+});
+// Add smooth hover effects
+document.addEventListener('DOMContentLoaded', function() {
+// Add hover effects to cards
+const cards = document.querySelectorAll('.action-card, .stat-card, .insight-card');
+cards.forEach(card => {
+card.addEventListener('mouseenter', function() {
+this.style.transform = 'translateY(-5px)';
+});
+
+card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+    });
+});
+
+});
+// Export for debugging
+window.HKIATracker = {
+userData,
+CONFIG,
+loadCommunityStats,
+loadPersonalStats,
+openCollectionForm,
+openPersonalDashboard,
+openCommunityDashboard
+};
+console.log('🌸 HKIA Flower Tracker app.js loaded successfully!')
