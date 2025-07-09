@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ombre Flower Collection Grid</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+  <script>
+    const WEBAPP_URL = 'YOUR_WEBAPP_URL'; // Replace with your deployed Apps Script Web App URL
+
+    async function submitFlower(data) {
+      const resp = await fetch(WEBAPP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data)
+      });
+      return resp.json();
+    }
+
+    function onClickFlower(color1, color2, flowerId) {
+      const player = prompt("Enter your player name:");
+      if (!player) return;
+      const share = confirm("Share flower collection with community?");
+      const fields = {
+        'What is your player name?': player,
+        'Share flower collection with community?': share,
+        'What is the breed of flower?': 'Hybrid',
+        'What is the flower pattern?': 'Ombre',
+        'What is the color of your flower?': `${color1} to ${color2}`,
+        'What is the first color of your flower?': color1,
+        'What is the second color of your flower?': color2,
+        'Flower ID': flowerId
+      };
+      submitFlower(fields)
+        .then(r => {
+          if (r.result === 'success') alert('🌸 Flower logged successfully!');
+          else alert('Oops, something went wrong.');
+        });
+    }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1>🌸 HKIA Ombre Flower Tracker 🌸</h1>
+      <p>Click a checkmark to log your ombre flower discovery!</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-brand">🌺 FlowerTracker</div>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="#collection" class="nav-link active">Ombre Grid</a>
+        <a href="#community" class="nav-link">Community</a>
+        <a href="#leaderboards" class="nav-link">Leaderboards</a>
+      </div>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <!-- Grid Content -->
+  <main class="section">
+    <div class="container">
+      <h2>🌿 Ombre Pattern Color Combinations</h2>
+      <div class="personal-stats">
+        <!-- Example Entries -->
+        <div class="stat-card" onclick="onClickFlower('Red','Pink','REDPINK01')">
+          <div class="stat-number">✔️</div>
+          <div class="stat-label">Red to Pink</div>
+        </div>
+        <div class="stat-card" onclick="onClickFlower('Blue','Purple','BLUEPURP01')">
+          <div class="stat-number">✔️</div>
+          <div class="stat-label">Blue to Purple</div>
+        </div>
+        <div class="stat-card" onclick="onClickFlower('Yellow','Orange','YELLORANGE01')">
+          <div class="stat-number">✔️</div>
+          <div class="stat-label">Yellow to Orange</div>
+        </div>
+        <div class="stat-card" onclick="onClickFlower('Pink','White','PINKWHITE01')">
+          <div class="stat-number">✔️</div>
+          <div class="stat-label">Pink to White</div>
+        </div>
+        <div class="stat-card" onclick="onClickFlower('Green','Teal','GREENTEAL01')">
+          <div class="stat-number">✔️</div>
+          <div class="stat-label">Green to Teal</div>
+        </div>
+        <!-- Add more color pairs as needed -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>🌸 HKIA Flower Tracker</h4>
+          <p>Built by the community, for the community. Track your Hello Kitty Island Adventure flower collection with friends!</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#" onclick="openCollectionForm()">Log Flowers</a></li>
+            <li><a href="#" onclick="openPersonalDashboard()">My Dashboard</a></li>
+            <li><a href="#" onclick="openCommunityDashboard()">Community Data</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="#" onclick="showAbout()">About This Project</a></li>
+            <li><a href="#" onclick="showHelp()">How to Use</a></li>
+            <li><a href="#" onclick="showContact()">Contact & Feedback</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 HKIA Flower Tracker Community Project | Made with 💖 for Hello Kitty Island Adventure players</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
